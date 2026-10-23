@@ -25,10 +25,12 @@ export default function LandingPage() {
           </div>
 
           <div className="relative">
-            <img
+            <Image
               src="https://plus.unsplash.com/premium_vector-1683133928836-bf1824624644?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Brainstorm - imagens de pessoas compartilhando ideias"
-              className="rounded-2xl shadow-lg"
+              width={1632}
+              height={1088} // Ajuste a altura proporcional à proporção real da imagem
+              className="rounded-2xl object-cover shadow-lg"
             />
           </div>
         </div>

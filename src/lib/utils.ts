@@ -37,8 +37,6 @@ export function getCardColor(label?: string | null) {
 }
 
 export function initSocket() {
-  const token = localStorage.getItem("token");
-
   return io(API_URL, {
     withCredentials: true,
     autoConnect: false,

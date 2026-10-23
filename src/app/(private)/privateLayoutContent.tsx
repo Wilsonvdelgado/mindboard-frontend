@@ -24,7 +24,7 @@ export function PrivateLayoutContent({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { user, loading, clearUser } = useAuth();
+  const { user, clearUser } = useAuth();
   const router = useRouter();
 
   function handleProfile() {

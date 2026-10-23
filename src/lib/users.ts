@@ -39,6 +39,7 @@ export function verifyUserCreatePassword(
   data: CreatePasswordSchema & { token: string },
 ) {
   return apiFetch<Partial<IUser>>("users/verify/" + token, {
-    method: "GET",
+    method: "POST",
+    body: data,
   });
 }

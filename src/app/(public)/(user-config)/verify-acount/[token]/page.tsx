@@ -39,7 +39,7 @@ export default function VerifyAcountPage() {
       .catch(() => {
         router.replace("/boards");
       });
-  }, [token]);
+  }, [token, router]);
 
   const password = watch("password", "");
 
