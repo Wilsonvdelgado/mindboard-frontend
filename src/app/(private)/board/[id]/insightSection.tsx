@@ -1,3 +1,5 @@
+"use client";
+
 import type { ICard } from "./types";
 
 import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";

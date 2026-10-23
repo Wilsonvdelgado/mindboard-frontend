@@ -1,3 +1,5 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { formMessageSchema, type IFormMessage } from "./types";
@@ -23,12 +25,12 @@ export function FormMessage({ onSendMessage }: IProps) {
           id="message"
           type="text"
           placeholder="Escreve uma mensagem..."
-          className="flex-1 border rounded-l px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          className="flex-1 rounded-l border px-3 py-2 focus:border-blue-300 focus:ring focus:outline-none"
           {...register("content")}
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700"
+          className="rounded-r bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         >
           Enviar
         </button>

@@ -1,3 +1,5 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModalBody } from "flowbite-react";
 import { useForm } from "react-hook-form";
