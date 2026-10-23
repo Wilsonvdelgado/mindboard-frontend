@@ -1,3 +1,5 @@
+"use client";
+
 import { AppLoading } from "@/src/components/appLoading";
 import { ModalChangeCreate } from "./modalChangePassword";
 import { Card, Dropdown, DropdownItem } from "flowbite-react";
