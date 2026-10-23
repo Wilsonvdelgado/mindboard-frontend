@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MindBoard
 
-## Getting Started
+Frontend do MindBoard, uma aplicação para organizar ideias e colaborar em
+quadros.
 
-First, run the development server:
+## Principais tecnologias
+
+- **Next.js 15 (App Router)** — framework React utilizado para páginas,
+  navegação e estrutura da aplicação.
+- **React 19** — biblioteca para construção das interfaces e componentes.
+- **TypeScript** — adiciona tipagem estática ao código JavaScript.
+- **Tailwind CSS 4** — ferramenta utilitária para estilização da interface.
+- **Flowbite React** — componentes de interface integrados com Tailwind CSS.
+- **React Hook Form e Zod** — gestão de formulários e validação dos dados.
+- **dnd-kit** — suporte a interações de arrastar e soltar, como a organização
+  de itens nos quadros.
+- **Socket.IO Client** — comunicação em tempo real com o backend.
+- **Notistack** — apresentação de notificações na aplicação.
+- **React Icons** — biblioteca de ícones.
+
+## Requisitos
+
+- Node.js e npm
+- Backend do MindBoard em execução
+
+## Configuração e execução
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Crie um ficheiro `.env.local` na raiz do projeto e defina o endereço da API:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
+Inicie o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Comandos disponíveis
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — inicia o servidor de desenvolvimento.
+- `npm run build` — cria a versão de produção.
+- `npm run start` — inicia a versão de produção já compilada.
+- `npm run format:check` — verifica a formatação dos ficheiros.
