@@ -3,6 +3,10 @@
 Frontend do MindBoard, uma aplicação para organizar ideias e colaborar em
 quadros.
 
+## Aplicação online
+
+Aceda ao frontend publicado em [mindboard-frontend-rouge.vercel.app](https://mindboard-frontend-rouge.vercel.app/).
+
 ## Principais tecnologias
 
 - **Next.js 15 (App Router)** — framework React utilizado para páginas,
