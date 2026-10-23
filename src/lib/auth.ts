@@ -1,3 +1,4 @@
+import { IFormChangePassword } from "../app/(private)/profile/types";
 import { apiFetch } from "./api";
 
 export type LoginInput = {
@@ -33,5 +34,12 @@ export function getCurrentUser() {
   return apiFetch<User>("auth/me", {
     method: "GET",
     cache: "no-store",
+  });
+}
+
+export function changePassword(data: IFormChangePassword) {
+  return apiFetch<void>("auth/change-password", {
+    method: "POST",
+    body: data,
   });
 }

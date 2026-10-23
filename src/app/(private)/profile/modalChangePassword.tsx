@@ -1,16 +1,18 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModalBody } from "flowbite-react";
 import { useForm } from "react-hook-form";
 
-import { MbTextInput } from "../../components/mbTextInput";
 import { formChangePasswordSchema, type IFormChangePassword } from "./types";
 import {
-  apiRequest,
   showErrorNotification,
   showSuccessNotification,
-} from "../../utils";
+} from "../../../lib/utils";
 import { useState } from "react";
-import { MbModal } from "../../components/mbModal";
+import { changePassword } from "@/src/lib/auth";
+import { MbModal } from "@/src/components/mbModal";
+import { MbTextInput } from "@/src/components/mbTextInput";
 
 interface ModalChangeCreateProps {
   show: boolean;
@@ -30,10 +32,7 @@ export function ModalChangeCreate({ show, onClose }: ModalChangeCreateProps) {
 
   const onSubmit = (data: IFormChangePassword) => {
     setSaving(true);
-    apiRequest("users/change-password", {
-      method: "POST",
-      body: data,
-    })
+    changePassword(data)
       .then(() => {
         setSaving(false);
         showSuccessNotification("Palava-passe atualizada!");
@@ -55,7 +54,7 @@ export function ModalChangeCreate({ show, onClose }: ModalChangeCreateProps) {
     <MbModal show={show} onClose={handleClose} title="Alterar password">
       <ModalBody>
         <div className="space-y-6">
-          <form className="flex  flex-col gap-4">
+          <form className="flex flex-col gap-4">
             <div>
               <MbTextInput
                 id="password"
