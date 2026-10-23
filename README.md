@@ -7,6 +7,10 @@ quadros.
 
 Aceda ao frontend publicado em [mindboard-frontend-rouge.vercel.app](https://mindboard-frontend-rouge.vercel.app/).
 
+## Interface da aplicação
+
+![Interface da aplicação MindBoard](./print/screen.png)
+
 ## Principais tecnologias
 
 - **Next.js 15 (App Router)** — framework React utilizado para páginas,
