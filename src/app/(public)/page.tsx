@@ -26,7 +26,7 @@ export default function LandingPage() {
 
           <div className="relative">
             <Image
-              src="https://plus.unsplash.com/premium_vector-1683133928836-bf1824624644?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://images.unsplash.com/vector-1757394158090-f76e0d78d661?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0"
               alt="Brainstorm - imagens de pessoas compartilhando ideias"
               width={1632}
               height={1088} // Ajuste a altura proporcional à proporção real da imagem
