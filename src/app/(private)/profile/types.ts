@@ -1,5 +1,5 @@
-import type { IUserRole } from "../Users/types";
 import { z } from "zod";
+import { IUserRole } from "../users/types";
 
 export interface IUserProfile {
   id: string;
