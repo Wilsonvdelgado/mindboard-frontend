@@ -28,6 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(currentUser);
       return currentUser;
     } catch (error) {
+      console.log("catch in refreshUser", error);
       setUser(null);
       throw error;
     }

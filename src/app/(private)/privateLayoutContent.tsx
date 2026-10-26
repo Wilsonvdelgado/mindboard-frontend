@@ -18,14 +18,21 @@ import { AppLoading } from "@/src/components/appLoading";
 import { SnackbarProvider } from "notistack";
 import { useRouter } from "next/navigation";
 import { logoutRequest } from "@/src/lib/auth";
+import { useEffect } from "react";
 
 export function PrivateLayoutContent({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { user, clearUser } = useAuth();
+  const { user, loading, clearUser } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+  }, [loading, user, router]);
 
   function handleProfile() {
     router.push("/profile");
@@ -38,7 +45,7 @@ export function PrivateLayoutContent({
     });
   }
 
-  const isLoadingUserData = user === null;
+  const isLoadingUserData = loading || user === null;
 
   return (
     <>

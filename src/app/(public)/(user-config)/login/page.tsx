@@ -28,18 +28,16 @@ export default function Login() {
   async function onSave(userData: LoginSchema) {
     setValidating(true);
     setError(null);
-    console.log("userData", userData);
-    loginRequest(userData)
-      .then(() => {
-        setValidating(false);
-        router.replace("/boards");
-        router.refresh();
-      })
-      .catch((err) => {
-        setValidating(false);
-        setError(err.message || "Ocorreu um erro");
-        setValue("password", "");
-      });
+    try {
+      await loginRequest(userData);
+      router.refresh();
+      router.replace("/boards");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Ocorreu um erro");
+      setValue("password", "");
+    } finally {
+      setValidating(false);
+    }
   }
 
   return (
