@@ -19,6 +19,8 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const url = `/api/backend/${path.replace(/^\//, "")}`;
 
+  console.log("apiFetch", url, options);
+
   const response = await fetch(url, {
     ...options,
     credentials: "include",
