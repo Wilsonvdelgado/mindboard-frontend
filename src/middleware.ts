@@ -3,8 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  console.log("pathname", pathname);
-
   const isProtectedPage =
     pathname.startsWith("/boards") ||
     pathname.startsWith("/profile") ||
@@ -12,12 +10,10 @@ export function middleware(request: NextRequest) {
 
   const hasCookie = request.cookies.has("access_token");
 
-  // if (isProtectedPage && !hasCookie) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
-  if (!hasCookie) {
+  if (isProtectedPage && !hasCookie) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
   return NextResponse.next();
 }
 

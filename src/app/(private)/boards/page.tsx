@@ -40,9 +40,9 @@ export default function BoardsPage() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   loadData();
-  // }, [loadData]);
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   function handleOpenCreate() {
     setShowModal(true);
