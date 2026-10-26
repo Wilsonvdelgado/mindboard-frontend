@@ -12,11 +12,9 @@ export function middleware(request: NextRequest) {
 
   const hasCookie = request.cookies.has("access_token");
 
-  console.log("hasCookie", hasCookie);
-
-  // if (isProtectedPage && !hasCookie) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
+  if (isProtectedPage && !hasCookie) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   return NextResponse.next();
 }
