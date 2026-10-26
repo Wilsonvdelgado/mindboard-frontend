@@ -59,6 +59,7 @@ export default function Login() {
               id="email"
               type="email"
               placeholder="email@exemplo.com"
+              value={"admin@mindboardips.com"}
               className="mt-2"
               {...register("email")}
               color={errors.email ? "failure" : "gray"}
@@ -78,6 +79,7 @@ export default function Login() {
               id="password"
               type="password"
               placeholder="Palavra-passe"
+              value={"admin123"}
               className="mt-2"
               {...register("password")}
               color={errors.password ? "failure" : "gray"}
