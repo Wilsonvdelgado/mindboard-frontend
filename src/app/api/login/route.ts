@@ -32,7 +32,8 @@ export async function POST(request: Request) {
     }
 
     return response;
-  } catch {
+  } catch (error) {
+    console.log("erro: ", error);
     return NextResponse.json(
       { message: "Erro ao contactar o servidor de autenticação." },
       { status: 502 },
