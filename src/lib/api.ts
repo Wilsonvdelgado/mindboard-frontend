@@ -17,7 +17,7 @@ export async function apiFetch<T>(
   path: string,
   options: ApiOptions = {},
 ): Promise<T> {
-  const url = `${API_URL.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;
+  const url = `/api/backend/${path.replace(/^\//, "")}`;
 
   const response = await fetch(url, {
     ...options,

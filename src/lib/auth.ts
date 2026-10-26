@@ -18,10 +18,18 @@ export type LoginResponse = {
 };
 
 export function loginRequest(data: LoginInput) {
-  return apiFetch<LoginResponse>("auth/login", {
+  return fetch("/api/login", {
     method: "POST",
-    body: data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
+
+  // return apiFetch<LoginResponse>("auth/login", {
+  //   method: "POST",
+  //   body: data,
+  // });
 }
 
 export function logoutRequest() {

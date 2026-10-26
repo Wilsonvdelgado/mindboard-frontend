@@ -30,8 +30,8 @@ export default function Login() {
     setError(null);
     try {
       await loginRequest(userData);
-      router.refresh();
       router.replace("/boards");
+      router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ocorreu um erro");
       setValue("password", "");
