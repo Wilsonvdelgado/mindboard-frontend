@@ -40,9 +40,9 @@ export default function BoardsPage() {
       });
   }, []);
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
+  // useEffect(() => {
+  //   loadData();
+  // }, [loadData]);
 
   function handleOpenCreate() {
     setShowModal(true);
@@ -79,6 +79,8 @@ export default function BoardsPage() {
   function handleShowBoard(id: number) {
     router.push("/board/" + id);
   }
+
+  console.log("boards", boards);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
