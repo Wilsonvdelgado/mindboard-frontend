@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
   //   return NextResponse.redirect(new URL("/login", request.url));
   // }
   if (!hasCookie) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    // return NextResponse.redirect(new URL("/login", request.url));
   }
   return NextResponse.next();
 }
