@@ -38,7 +38,7 @@ export default function Login() {
         console.log("navegando depois do login");
         // router.refresh();
         router.replace("/boards");
-        // router.refresh();
+        router.refresh();
 
         // window.location.assign("/boards");
       });
