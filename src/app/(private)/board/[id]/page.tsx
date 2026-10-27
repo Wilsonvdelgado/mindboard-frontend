@@ -39,27 +39,36 @@ export default function BoardMind() {
   }, [boardId]);
 
   useEffect(() => {
+    if (!boardId) return;
+
+    // 1. Inicializa a instância do Socket
     const socket = initSocket();
     socketRef.current = socket;
 
     const handleConnect = () => {
-      console.log("Socket conectado:", socket.id);
-
+      console.log("Socket conectado com sucesso:", socket.id);
       socket.emit("joinBoard", Number(boardId));
     };
 
     const handleError = () => {
-      showErrorNotification("Ocorreu um erro!");
+      showErrorNotification("Ocorreu um erro na ligação em tempo real!");
     };
 
+    // 2. Regista os listeners de eventos
     socket.on("connect", handleConnect);
     socket.on("errorCards", handleError);
 
-    socket.connect();
+    // 3. Só força a ligação se ela não se iniciar automaticamente pelo initSocket()
+    if (!socket.connected) {
+      socket.connect();
+    }
 
+    // Se o componente re-renderizar ou remontar (ex: Strict Mode), limpa o estado anterior
     return () => {
       socket.off("connect", handleConnect);
       socket.off("errorCards", handleError);
+
+      // 4. Desconecta de forma limpa para o NestJS não receber uma quebra abrupta
       socket.disconnect();
 
       if (socketRef.current === socket) {
