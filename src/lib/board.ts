@@ -6,3 +6,9 @@ export function loadBoard(id: number) {
     method: "GET",
   });
 }
+
+export function getTicketWebSocket() {
+  return apiFetch<{ ticket: string }>("boards/socket-ticket", {
+    method: "POST",
+  });
+}

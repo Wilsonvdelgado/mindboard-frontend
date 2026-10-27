@@ -36,9 +36,11 @@ export function getCardColor(label?: string | null) {
   return COLORS.find((f) => f.label === label)?.value ?? "bg-white";
 }
 
-export function initSocket() {
-  console.log("API_URL", API_URL);
+export function initSocket(ticket: string) {
   return io(API_URL, {
+    auth: {
+      ticket,
+    },
     withCredentials: true,
     autoConnect: false,
   });

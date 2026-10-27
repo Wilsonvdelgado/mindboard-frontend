@@ -14,7 +14,7 @@ import { InsightSection } from "./insightSection";
 import { Socket } from "socket.io-client";
 import type { DefaultEventsMap } from "@socket.io/component-emitter";
 import { useParams } from "next/navigation";
-import { loadBoard } from "@/src/lib/board";
+import { getTicketWebSocket, loadBoard } from "@/src/lib/board";
 import { AppLoading } from "@/src/components/appLoading";
 import { TitlePage } from "@/src/components/titlePage";
 import { MbButton } from "@/src/components/mbButton";
@@ -44,6 +44,45 @@ export default function BoardMind() {
     if (!boardId) return;
 
     console.log("init socket");
+    let cancelled = false;
+    let socket: ReturnType<typeof initSocket> | null = null;
+
+    async function connectSocket() {
+      try {
+        const { ticket } = await getTicketWebSocket();
+
+        if (cancelled) return;
+
+        socket = initSocket(ticket);
+        socketRef.current = socket;
+
+        socket.on("connect", () => {
+          socket?.emit("joinBoard", Number(boardId));
+        });
+
+        socket.on("connect_error", (error) => {
+          console.error("Erro de conexão Socket.IO:", error.message);
+          showErrorNotification("Ocorreu um erro na ligação em tempo real!");
+        });
+
+        socket.on("errorCards", () => {
+          showErrorNotification("Ocorreu um erro na ligação em tempo real!");
+        });
+
+        socket.connect();
+      } catch (error) {
+        console.error("Não foi possível iniciar o Socket.IO:", error);
+        showErrorNotification(
+          "Não foi possível iniciar a ligação em tempo real.",
+        );
+      }
+    }
+
+    void connectSocket();
+
+    /* getTicketWebSocket().then((data) => {
+      console.log("ticket", data);
+    });
 
     // 1. Inicializa a instância do Socket
     const socket = initSocket();
@@ -70,38 +109,17 @@ export default function BoardMind() {
       console.log("Socket status após connect():", socket);
       console.log("Socket conectado com sucesso:", socket.id);
     }
-
+*/
     // Se o componente re-renderizar ou remontar (ex: Strict Mode), limpa o estado anterior
     return () => {
-      socket.off("connect", handleConnect);
-      socket.off("errorCards", handleError);
-
-      // 4. Desconecta de forma limpa para o NestJS não receber uma quebra abrupta
-      socket.disconnect();
+      cancelled = true;
+      socket?.disconnect();
 
       if (socketRef.current === socket) {
         socketRef.current = null;
       }
     };
   }, [boardId]);
-
-  // useEffect(() => {
-  //   // Entrar na room do board
-  //   console.log("init socket");
-  //   socketRef.current = initSocket();
-  //   const socket = socketRef.current;
-
-  //   socket.emit("joinBoard", boardId);
-
-  //   socket.on("errorCards", () => {
-  //     showErrorNotification("Ocorreu um erro!");
-  //   });
-
-  //   // Cleanup quando sair do board
-  //   return () => {
-  //     socket?.disconnect();
-  //   };
-  // }, [boardId]);
 
   /**create card */
   function handleCreateCard() {
