@@ -29,9 +29,13 @@ export default function Login() {
     setValidating(true);
     setError(null);
     try {
-      await loginRequest(userData);
-      router.replace("/boards");
-      router.refresh();
+      loginRequest(userData).then((response) => {
+        if (!response.ok) {
+          throw new Error("Email ou senha inválidos");
+        }
+        router.replace("/boards");
+        // router.refresh();
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ocorreu um erro");
       setValue("password", "");
