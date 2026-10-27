@@ -35,11 +35,15 @@ export default function BoardMind() {
       .then((data) => {
         setBoardData(data);
       })
-      .catch(() => {});
+      .catch(() => {
+        console.log("load board setBoardData");
+      });
   }, [boardId]);
 
   useEffect(() => {
     if (!boardId) return;
+
+    console.log("init socket");
 
     // 1. Inicializa a instância do Socket
     const socket = initSocket();
@@ -60,7 +64,9 @@ export default function BoardMind() {
 
     // 3. Só força a ligação se ela não se iniciar automaticamente pelo initSocket()
     if (!socket.connected) {
+      console.log("Forçando a conexão do socket...");
       socket.connect();
+      console.log("Socket conectado com sucesso:", socket.id);
     }
 
     // Se o componente re-renderizar ou remontar (ex: Strict Mode), limpa o estado anterior
