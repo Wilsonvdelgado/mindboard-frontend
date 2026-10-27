@@ -67,6 +67,7 @@ export default function BoardMind() {
     if (!socket.connected) {
       console.log("Forçando a conexão do socket...");
       socket.connect();
+      console.log("Socket status após connect():", socket);
       console.log("Socket conectado com sucesso:", socket.id);
     }
 
