@@ -9,6 +9,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/admin");
 
   const hasCookie = request.cookies.has("access_token");
+  console.log("URL:", request.url);
+  console.log("Host:", request.nextUrl.host);
   console.log("cookie", hasCookie);
 
   if (isProtectedPage && !hasCookie) {
