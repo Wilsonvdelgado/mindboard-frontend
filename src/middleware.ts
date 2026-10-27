@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/admin");
 
   const hasCookie = request.cookies.has("access_token");
+  console.log("cookie", hasCookie);
 
   if (isProtectedPage && !hasCookie) {
     return NextResponse.redirect(new URL("/login", request.url));

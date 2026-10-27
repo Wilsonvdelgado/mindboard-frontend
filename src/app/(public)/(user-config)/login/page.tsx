@@ -30,11 +30,15 @@ export default function Login() {
     setError(null);
     try {
       loginRequest(userData).then((response) => {
+        console.log("then login");
         if (!response.ok) {
           throw new Error("Email ou senha inválidos");
         }
+
+        console.log("navegando depois do login");
         router.replace("/boards");
-        // router.refresh();
+        // window.location.assign("/boards");
+        router.refresh();
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ocorreu um erro");
