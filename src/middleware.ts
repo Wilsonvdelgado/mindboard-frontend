@@ -8,6 +8,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/profile") ||
     pathname.startsWith("/admin");
 
+  console.log("coodkie", request.cookies);
+
   const hasCookie = request.cookies.has("access_token");
   console.log("URL:", request.url);
   console.log("Host:", request.nextUrl.host);

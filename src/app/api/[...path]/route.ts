@@ -17,6 +17,7 @@ async function handler(
   const apiPath = path.slice(1);
   const token = request.cookies.get("access_token")?.value;
 
+  console.log("token", token);
   if (!token) {
     return NextResponse.json({ message: "Não autenticado." }, { status: 401 });
   }

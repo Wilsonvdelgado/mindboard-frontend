@@ -8,7 +8,7 @@ import type { User } from "./auth";
 export async function getAuthenticatedUser(): Promise<User | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get("access_token")?.value;
-
+  console.log("get cookie in getAuthenticatedUser");
   if (!token) {
     return null;
   }

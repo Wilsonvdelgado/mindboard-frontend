@@ -36,6 +36,7 @@ export async function POST(request: Request) {
 
     const token = authCookie.match(/^access_token=([^;]*)/)?.[1];
 
+    console.log("token after login", token);
     if (!token) {
       return NextResponse.json(
         { message: "Cookie de autenticação inválido." },
