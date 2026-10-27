@@ -30,6 +30,7 @@ export default function BoardsPage() {
 
   const [editBoard, setEditModal] = useState<IBoard | null>(null);
 
+  console.log("listagem boards");
   const loadData = useCallback(() => {
     loadBoards()
       .then((data) => {

@@ -39,6 +39,7 @@ export function logoutRequest() {
 }
 
 export function getCurrentUser() {
+  console.log("get userr get current use");
   return apiFetch<User>("auth/me", {
     method: "GET",
     cache: "no-store",
