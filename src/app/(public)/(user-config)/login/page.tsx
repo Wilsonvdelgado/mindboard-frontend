@@ -36,9 +36,9 @@ export default function Login() {
         }
 
         console.log("navegando depois do login");
+        router.refresh();
         router.replace("/boards");
         // window.location.assign("/boards");
-        router.refresh();
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ocorreu um erro");
