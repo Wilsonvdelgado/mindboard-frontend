@@ -6,34 +6,57 @@ export async function POST(request: Request) {
 
     const apiResponse = await fetch(`${process.env.API_URL}/auth/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
       cache: "no-store",
     });
 
     const data = await apiResponse.json();
 
-    const response = NextResponse.json(data, {
-      status: apiResponse.status,
-    });
-
-    // Encaminhar os cookies do NestJS para o browser
-    const cookies = apiResponse.headers.getSetCookie();
-
-    for (const cookie of cookies) {
-      // O cookie deve pertencer ao domínio do frontend.
-      const frontendCookie = cookie
-        .replace(/;\s*Domain=[^;]*/i, "")
-        .replace(/;\s*SameSite=None/i, "; SameSite=Lax");
-
-      response.headers.append("Set-Cookie", frontendCookie);
+    if (!apiResponse.ok) {
+      return NextResponse.json(data, {
+        status: apiResponse.status,
+      });
     }
+
+    // O NestJS deve devolver o token no cookie.
+    const setCookies = apiResponse.headers.getSetCookie();
+    const authCookie = setCookies.find((cookie) =>
+      cookie.startsWith("access_token="),
+    );
+
+    if (!authCookie) {
+      console.error("O NestJS não devolveu o cookie access_token.");
+
+      return NextResponse.json(
+        { message: "Cookie de autenticação não recebido." },
+        { status: 502 },
+      );
+    }
+
+    const token = authCookie.match(/^access_token=([^;]*)/)?.[1];
+
+    if (!token) {
+      return NextResponse.json(
+        { message: "Cookie de autenticação inválido." },
+        { status: 502 },
+      );
+    }
+
+    const response = NextResponse.json(data);
+
+    response.cookies.set("access_token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60,
+    });
 
     return response;
   } catch (error) {
-    console.log("erro: ", error);
+    console.error("Erro no login:", error);
+
     return NextResponse.json(
       { message: "Erro ao contactar o servidor de autenticação." },
       { status: 502 },

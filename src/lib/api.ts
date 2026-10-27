@@ -23,7 +23,9 @@ export async function apiFetch<T>(
 
   const response = await fetch(url, {
     ...options,
-    credentials: "include",
+    // credentials: "include",
+    credentials: "same-origin",
+
     headers: {
       ...(options.body !== undefined
         ? { "Content-Type": "application/json" }
