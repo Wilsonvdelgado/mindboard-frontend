@@ -47,6 +47,7 @@ export default function BoardMind() {
 
     // 1. Inicializa a instância do Socket
     const socket = initSocket();
+    console.log("socket", socket);
     socketRef.current = socket;
 
     const handleConnect = () => {

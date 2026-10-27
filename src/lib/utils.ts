@@ -37,6 +37,7 @@ export function getCardColor(label?: string | null) {
 }
 
 export function initSocket() {
+  console.log("API_URL", API_URL);
   return io(API_URL, {
     withCredentials: true,
     autoConnect: false,
